@@ -1,0 +1,18 @@
+plugins {
+  id 'java'
+}
+
+group = 'suztomo'
+version = '0.1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+dependencies {
+  // com.google.http-client:google-http-client-appengine:1.35.0 has a dependency of
+  // com.google.appengine:appengine-api-1.0-sdk:1.9.71 with provided scope
+  implementation 'com.google.http-client:google-http-client-appengine:1.35.0'
+}
+
+repositories {
+  mavenCentral()
+}
