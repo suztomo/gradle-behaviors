@@ -1,4 +1,3 @@
-
 # Provided Scope
 
 `com.google.http-client:google-http-client-appengine:1.35.0` has a dependency of
