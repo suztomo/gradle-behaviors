@@ -5,9 +5,27 @@ Gradle ignores Maven profiles.
 In this experiment, I use `com.google.cloud:google-cloud-firestore:1.32.0`.
 The `com.google.cloud:google-cloud-firestore:1.32.0`'s pom.xml defines a profile to add
 `javax.annotation:javax.annotation-api:jar:1.3.2` dependency only if JDK version
-is Java 9 or higher.
+is Java 9 or higher:
 
-## With Java 11
+```
+  <profiles>
+    <profile>
+      <id>java9</id>
+      <activation>
+        <jdk>[9,)</jdk>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>javax.annotation</groupId>
+          <artifactId>javax.annotation-api</artifactId>
+          <version>${javax.annotations.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+```
+
+## Gradle With Java 11
 
 Set the java version to Java 11.
 
@@ -402,10 +420,11 @@ compileClasspath - Compile classpath for source set 'main'.
 
 Maven handles the profile as expected.
 
-## With Java 11
+## Maven With Java 11
 
 The tree does have the javax.annotation-api dependency directly below
-`com.google.cloud:google-cloud-firestore:1.32.0`.
+`com.google.cloud:google-cloud-firestore:1.32.0`. This is because Maven respects
+the profile that is activated for Java 9 and higher.
 
 
 ```
@@ -467,7 +486,7 @@ The tree does have the javax.annotation-api dependency directly below
 [INFO]    \- javax.annotation:javax.annotation-api:jar:1.3.2:compile
 ```
 
-## With Java 8
+## Maven With Java 8
 
 The dependency is not there because the profile is activated only if the JDK is
 verison 9 or higher.
